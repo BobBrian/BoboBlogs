@@ -1,5 +1,7 @@
 class PostsController < ApplicationController
   before_action :set_post, only: %i[ show edit update destroy ]
+  before_action :authorize_blogger, only: [:new, :create ,:edit, :update, :my_posts]
+
 
   # GET /posts or /posts.json
   def index
@@ -58,6 +60,10 @@ class PostsController < ApplicationController
     end
   end
 
+  def my_posts
+    @posts = current_user.posts if current_user.role == "Blogger"
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_post
@@ -67,5 +73,12 @@ class PostsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def post_params
       params.require(:post).permit(:message)
+    end
+
+    def authorize_blogger
+      unless current_user && current_user.role == "Blogger"
+        flash[:alert] = "You are not authorized to access this page."
+        redirect_to root_path
+      end
     end
 end
