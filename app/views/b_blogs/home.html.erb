@@ -1,0 +1,38 @@
+<h1>Welcome to Bryan's Blogs</h1>
+<p>Welcome to the Landing Page for both Admins and Bloggers</p>
+
+<% if user_signed_in? %>
+  <p> Hello Welcome to the website </p>
+  <p> This Website was made to teach about certain things like</p>
+  <p> Root Routing</p>
+  <p> Foreign Key Association</p>
+  <p> Using Form with Foreign Key Associations</p>
+  <p> Using the Devise Gem</p>
+  <p> Dsiplaying all Users who have created sessions using the Devise Gem</p>
+  <br/>
+  <p> Hello <%= current_user.username %></p>
+   <p>Your Email is <%= current_user.email %></p>
+  <p>Did you Know on our System you are a <%= current_user.role %></p>
+  <p> You have successfully logged in</p>
+  <br/>
+
+  <% if current_user.role == 'Admin' %>
+    <p>As the Admin of this Site you have various fucntions you can access</p>
+    <p>You can view all Users</p>
+    <p>You can view all Posts made by a User</p>
+    <p>Delete Users</p>
+    <% elsif current_user.role == 'Blogger' %>
+    <p>As a Blogger of this Site you have various fucntions you can access</p>
+    <p>You can create a Post</p>
+    <p>You can view all Posts (that you have made)</p>
+    <% else %>
+    <p>Seems you are an Unkown User and cannot access code beyond this point</p>
+  <% end%>
+
+<%else%>
+ <p>You are not Signed In therfore you cannot see any information  beyond this point </p>
+  <%= link_to "Sign-Up", new_user_registration_path%>
+  <br/>
+  <%= link_to "Sign-In", new_user_session_path%>
+<% end %>
+
