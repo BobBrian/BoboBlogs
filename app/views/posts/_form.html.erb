@@ -11,9 +11,11 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :message, style: "display: block" %>
-    <%= form.text_field :message %>
+  <div class="row">
+    <div class="col-md-6">
+      <%= form.label :message, style: "display: block" ,class: "form-label"%>
+      <%= form.text_area :message, class: "form-control", aria: { label: "With textarea" } %>
+    </div>
   </div>
 
   <div>

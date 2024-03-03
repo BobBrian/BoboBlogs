@@ -15,9 +15,21 @@
           <li class="nav-item">
             <%= link_to "Edit Profile", edit_user_registration_path, class: "nav-link" %>
           </li>
+          <% if current_user.role == 'Admin' %>
+            <p>No Routes are Avaible Right Noww</p>
+
+          <% elsif current_user.role == 'Blogger' %>
+            <li class="nav-item">
+              <%= link_to 'Create Post', new_post_path, class: "nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to 'View All My Posts', posts_path, class: "nav-link" %>
+            </li>
+          <% else %>
+
+          <% end %>
         <% end %>
         
-
       </ul>
     </div>
   </div>
